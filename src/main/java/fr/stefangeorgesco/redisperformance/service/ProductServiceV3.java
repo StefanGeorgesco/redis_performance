@@ -6,24 +6,24 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
 @Service
-public class ProductServiceV2 {
+public class ProductServiceV3 {
 
-    private final CacheTemplate<Integer, Product> productCacheTemplate;
+    private final CacheTemplate<Integer, Product> productLocalCacheTemplate;
 
-    public ProductServiceV2(CacheTemplate<Integer, Product> productCacheTemplate) {
-        this.productCacheTemplate = productCacheTemplate;
+    public ProductServiceV3(CacheTemplate<Integer, Product> productLocalCacheTemplate) {
+        this.productLocalCacheTemplate = productLocalCacheTemplate;
     }
 
     public Mono<Product> getProduct(int id) {
-        return productCacheTemplate.get(id);
+        return productLocalCacheTemplate.get(id);
     }
 
     public Mono<Product> updateProduct(int id, Mono<Product> productMono) {
         return productMono
-                .flatMap(product -> productCacheTemplate.update(id, product));
+                .flatMap(product -> productLocalCacheTemplate.update(id, product));
     }
 
     public Mono<Void> deleteProduct(int id) {
-        return productCacheTemplate.delete(id);
+        return productLocalCacheTemplate.delete(id);
     }
 }
