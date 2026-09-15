@@ -1,7 +1,9 @@
 package fr.stefangeorgesco.redisperformance.entity;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
 
+@Table
 public class Product {
 
     @Id
