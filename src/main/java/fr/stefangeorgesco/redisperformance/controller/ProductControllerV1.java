@@ -1,17 +1,17 @@
 package fr.stefangeorgesco.redisperformance.controller;
 
 import fr.stefangeorgesco.redisperformance.entity.Product;
-import fr.stefangeorgesco.redisperformance.service.ProductService;
+import fr.stefangeorgesco.redisperformance.service.ProductServiceV1;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 @RestController
-@RequestMapping("product")
-public class ProductController {
+@RequestMapping("product/v1")
+public class ProductControllerV1 {
 
-    private final ProductService service;
+    private final ProductServiceV1 service;
 
-    public ProductController(ProductService service) {
+    public ProductControllerV1(ProductServiceV1 service) {
         this.service = service;
     }
 

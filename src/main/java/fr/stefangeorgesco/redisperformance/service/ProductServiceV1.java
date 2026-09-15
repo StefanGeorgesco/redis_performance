@@ -6,11 +6,11 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
 @Service
-public class ProductService {
+public class ProductServiceV1 {
 
     private final ProductRepository repository;
 
-    public ProductService(ProductRepository repository) {
+    public ProductServiceV1(ProductRepository repository) {
         this.repository = repository;
     }
 
