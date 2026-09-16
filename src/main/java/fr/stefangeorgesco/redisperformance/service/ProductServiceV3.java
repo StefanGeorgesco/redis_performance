@@ -9,13 +9,17 @@ import reactor.core.publisher.Mono;
 public class ProductServiceV3 {
 
     private final CacheTemplate<Integer, Product> productLocalCacheTemplate;
+    private final ProductVisitService productVisitService;
 
-    public ProductServiceV3(CacheTemplate<Integer, Product> productLocalCacheTemplate) {
+    public ProductServiceV3(CacheTemplate<Integer, Product> productLocalCacheTemplate,
+                            ProductVisitService productVisitService) {
         this.productLocalCacheTemplate = productLocalCacheTemplate;
+        this.productVisitService = productVisitService;
     }
 
     public Mono<Product> getProduct(int id) {
-        return productLocalCacheTemplate.get(id);
+        return productLocalCacheTemplate.get(id)
+                .doFirst(() -> productVisitService.addVisit(id));
     }
 
     public Mono<Product> updateProduct(int id, Mono<Product> productMono) {
